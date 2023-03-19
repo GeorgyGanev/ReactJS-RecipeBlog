@@ -13,7 +13,7 @@ export const Register = () => {
                     <label htmlFor="username">Username</label>
                     <input type="text" placeholder="Enter Username" name="username" required />
 
-                    <label htmlFrom="password">Password</label>
+                    <label htmlFor="password">Password</label>
                     <input type="password" placeholder="Enter Password" name="password" required />
 
                     <label htmlFor="repeatPass">Repeat Password</label>

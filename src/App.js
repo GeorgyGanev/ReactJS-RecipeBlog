@@ -1,4 +1,7 @@
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+
+import * as recipeService from './services/recipeService';
 
 import { Header } from './components/Header/Header';
 import {Footer} from './components/Footer/Footer';
@@ -8,6 +11,16 @@ import { Register } from './components/Register/Register';
 import { CreateRecipe } from './components/CreateRecipe/CreateRecipe';
 
 function App() {
+  const navigate = useNavigate();
+  
+  const [recipes, setRecipes] = useState([]);
+
+  const onCreateRecipeSubmit = async (recipeData) => {
+      const newRecipe = await recipeService.createRecipe(recipeData);
+
+      console.log(newRecipe)
+  } 
+
   return (
     <div className='App'>
       
@@ -18,7 +31,7 @@ function App() {
             <Route path='/' element={<Home />}/>
             <Route path='/login' element={<Login />}/>
             <Route path='/register' element={<Register />}/>
-            <Route path='/create' element={<CreateRecipe />}/>
+            <Route path='/create' element={<CreateRecipe onCreateRecipeSubmit={onCreateRecipeSubmit} />}/>
           
           </Routes>
 
