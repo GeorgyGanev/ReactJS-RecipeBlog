@@ -19,13 +19,13 @@ function App() {
   useEffect(() => {
     recipeService.getAll()
       .then(result => setRecipes(result));
-  }, [])
+  }, []);
+
 
   const onCreateRecipeSubmit = async (recipeData) => {
       const newRecipe = await recipeService.createRecipe(recipeData);
 
       setRecipes(state => [...state, newRecipe]);
-
       navigate('/catalog');
   } 
 
