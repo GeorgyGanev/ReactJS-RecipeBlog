@@ -10,22 +10,22 @@ export const CreateRecipe = () => {
                 <label htmlFor="dishName">Dish Name</label>
                 <input type="text" placeholder="Enter Dish Name" name="dishName" / >
 
-                <label htmlFor="model">Car Model</label>
-                <input type="text" placeholder="Enter Car Model" name="model" />
-
                 <label htmlFor="description">Description</label>
-                <input type="text" placeholder="Enter Description" name="description" />
+                <input type="text" name="description" placeholder="Enter Description" />
+    
+                <label htmlFor="imageUrl">Dish Image</label>
+                <input type="text" placeholder="Enter Dish Image" name="imageUrl" />
 
-                <label htmlFor="year">Car Year</label>
-                <input type="number" placeholder="Enter Car Year" name="year" />
+                <label htmlFor="serving">Servings</label>
+                <input type="number" placeholder="Number of servings" name="serving" />
 
-                <label htmlFor="imageUrl">Car Image</label>
-                <input type="text" placeholder="Enter Car Image" name="imageUrl" />
+                <label htmlFor="ingredients">Ingredients</label>
+                <textarea type="text" placeholder="ex: Flour - 500 gr.&#10;Eggs - 2&#10;" />
 
-                <label htmlFor="price">Car Price</label>
-                <input type="number" placeholder="Enter Car Price" name="price" />
+                <label htmlFor="preparation">Preparation</label>
+                <textarea type="text" name="preparation" placeholder="Preparation instructions" />
 
-                <input type="submit" className={styles["registerbtn"]} value="Create Listing" />
+                <input type="submit" className={styles["registerbtn"]} value="Post Recipe" />
             </form>
         </div>
     </section>
