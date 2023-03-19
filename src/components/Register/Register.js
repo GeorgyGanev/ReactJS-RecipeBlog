@@ -8,7 +8,7 @@ export const Register = () => {
             <div className={styles["container"]}>
 
                 <form id={styles["register-form"]}>
-                    <h1>Register</h1>
+                    <h2>Register</h2>
                 
                     <label htmlFor="username">Username</label>
                     <input type="text" placeholder="Enter Username" name="username" required />

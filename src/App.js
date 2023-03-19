@@ -5,6 +5,7 @@ import {Footer} from './components/Footer/Footer';
 import { Home } from './components/Home/Home';
 import { Login } from './components/Login/Login';
 import { Register } from './components/Register/Register';
+import { CreateRecipe } from './components/CreateRecipe/CreateRecipe';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
             <Route path='/' element={<Home />}/>
             <Route path='/login' element={<Login />}/>
             <Route path='/register' element={<Register />}/>
+            <Route path='/create' element={<CreateRecipe />}/>
           
           </Routes>
 

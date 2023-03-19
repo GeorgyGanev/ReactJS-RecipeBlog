@@ -7,7 +7,7 @@ export const Login = () => {
         <section className={styles["login"]}>
             <div className={styles["container"]}>
                 <form id={styles["login-form"]}>
-                    <h1>Login</h1>
+                    <h2>Login</h2>
                     <p>Username</p>
                     <input placeholder="Enter Username" name="username" type="text" />
                     <p>Password</p>
