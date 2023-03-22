@@ -46,12 +46,18 @@ export const RecipeDetails = () => {
                      </ul>
                 </div>
                 
-                {isOwner && (
-                    <div className={styles["listings-buttons"]}>
-                    <Link to="#" className="button-list">Edit</Link>
-                    <Link to="#" className="button-list">Delete</Link>
+                <div className={styles["listings-buttons"]}>
+                        {isOwner && (
+                            <div className={styles['owner']}>
+                                <Link to="#" className="button-list">Edit</Link>
+                                <Link to="#" className="button-list">Delete</Link>
+                            </div>
+                        )}
+
+                        <Link to="/catalog" className="button-list">Back</Link>
                 </div>
-                )}
+
+            
                 
             </div>
         </section>
