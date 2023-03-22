@@ -13,6 +13,7 @@ import { Register } from './components/Register/Register';
 import { CreateRecipe } from './components/CreateRecipe/CreateRecipe';
 import { Catalog } from './components/Catalog/Catalog';
 import { Logout } from './components/Logout/Logout';
+import { RecipeDetails } from './components/RecipeDetails/RecipeDetails';
 
 function App() {
   const navigate = useNavigate();
@@ -99,6 +100,7 @@ function App() {
             <Route path='/logout' element={<Logout />} />
             <Route path='/create' element={<CreateRecipe onCreateRecipeSubmit={onCreateRecipeSubmit} />}/>
             <Route path='/catalog' element={<Catalog recipes={recipes} /> } />
+            <Route path='/catalog/:recipeId' element={<RecipeDetails /> } />
           
           </Routes>
 

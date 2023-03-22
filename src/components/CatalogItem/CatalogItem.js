@@ -16,7 +16,7 @@ export const CatalogItem = ({
                 <h3>{recipe.description} </h3>
             </div>
             <div className={styles["data-buttons"]}>
-                <Link to='' className={styles["button-recipeDetails"]}>Details</Link>
+                <Link to={`${recipe._id}`} className={styles["button-recipeDetails"]}>Details</Link>
             </div>
         </div>
     </div>

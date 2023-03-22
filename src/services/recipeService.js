@@ -18,9 +18,16 @@ export const recipeServiceFactory = (token) => {
         return result;
     }
 
+    const getOne = async (recipeId) => {
+        const result = await request.get(`${baseUrl}/${recipeId}`);
+
+        return result;
+    }
+
     return {
         getAll,
-        createRecipe
+        createRecipe,
+        getOne
     }
 }
 
