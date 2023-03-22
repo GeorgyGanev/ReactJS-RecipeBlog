@@ -18,7 +18,7 @@ export const CreateRecipe = ({
     return (
     <section id={styles["create-recipe"]}>
         <div className={styles["container"]}>
-            <form id={styles["create-form"]} onSubmit={onSubmit}>
+            <form method='post' id={styles["create-form"]} onSubmit={onSubmit}>
                 <h2>Share your recipe</h2>
             
                 <label htmlFor="dishName">Dish Name</label>

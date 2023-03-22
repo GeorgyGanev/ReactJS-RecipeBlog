@@ -1,15 +1,19 @@
 import styles from './Register.module.css';
 import { Link } from 'react-router-dom';
+import { useContext } from 'react';
 
 import { useForm } from '../../hooks/useForm';
+import { AuthContext } from '../../contexts/AuthContext';
 
 export const Register = () => {
 
+    const { onRegisterSubmit } = useContext(AuthContext);
+
     const { formValues, onSubmit, onChangeHandler, errors, checkLength } = useForm({
-        username: '',
+        email: '',
         password: '',
         repeatPass: ''
-    });
+    }, onRegisterSubmit);
 
 
     return (
@@ -19,10 +23,10 @@ export const Register = () => {
                 <form onSubmit={onSubmit} method='post' id={styles["register-form"]}>
                     <h2>Register</h2>
                 
-                    <label htmlFor="username">Username</label>
-                    <input type="text" placeholder="Enter Username" name="username" required value={formValues.username} onChange={onChangeHandler} onBlur={(e) => checkLength(e, 1, 20)} />
-                        {errors.username && 
-                            <p className={styles['warning-message']}>Username is mandatory!</p>}
+                    <label htmlFor="username">Email</label>
+                    <input type="text" placeholder="Enter Username" name="email" required value={formValues.username} onChange={onChangeHandler} onBlur={(e) => checkLength(e, 1, 20)} />
+                        {errors.email && 
+                            <p className={styles['warning-message']}>Email is mandatory!</p>}
 
                     <label htmlFor="password">Password</label>
                     <input type="password" placeholder="Enter Password" name="password" required value={formValues.password} onChange={onChangeHandler} onBlur={(e) => checkLength(e, 1)}/>

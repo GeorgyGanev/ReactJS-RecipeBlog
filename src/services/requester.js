@@ -1,6 +1,4 @@
-const host = 'http://localhost:3030/jsonstore';
-
-export const requester = async (method, url, data) => {
+export const request = async (method, token, url, data) => {
 
     const options = {
         method,
@@ -12,25 +10,37 @@ export const requester = async (method, url, data) => {
         options.body = JSON.stringify(data);
     }
 
-    try {
-        const response = await fetch(host + url, options);
+    if (token){
+        options.headers['X-Authorization'] = token;
+    }
+
+        const response = await fetch(url, options);
 
         if (response.status === 204){
-            return response;
+            return {};
         }
 
-        const result = response.json();
+        const result = await response.json();
+
         if (response.ok === false){
-            throw new Error(result.message)
+          
+            if (response.status === 404){
+                console.log('no data')
+            }
+            throw result;
         }
+
         return result;
 
-    } catch (err) {
-        alert(err.message);
-        throw err;
+}
+
+export const requestFactory = (token) => {
+    return {
+        get: request.bind(null, 'GET', token),
+        post: request.bind(null,'POST', token),
+        put: request.bind(null, 'PUT', token),
+        patch: request.bind(null, 'PATCH', token),
+        delete: request.bind(null, 'DELETE', token),
     }
 }
 
-export const get = requester.bind(null, 'GET');
-export const post = requester.bind(null, 'POST');
-export const del = requester.bind(null, 'DELETE');

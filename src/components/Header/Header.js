@@ -10,7 +10,7 @@ export const Header = () => {
             <div id={styles['profile']}>
                 <Link to="/catalog">Recipe Catalog</Link>
                 <Link to="/create">Share Recipe</Link>
-                <Link to="/">Logout</Link>
+                <Link to="/logout">Logout</Link>
             </div>
 
             <div id={styles['guest']}>
