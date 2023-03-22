@@ -70,13 +70,16 @@ function App() {
     await authService.logout();
     
     setUser({});
-
   };
 
   const contextValues = {
     onLoginSubmit,
     onRegisterSubmit,
-    onLogout
+    onLogout,
+    userId: user._id,
+    token: user.accessToken,
+    userEmail: user.email,
+    isAuthenticated: !!user.accessToken
   };
 
  
