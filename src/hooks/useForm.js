@@ -3,6 +3,7 @@ import { useState } from "react";
 export const useForm = (initialValues, onSubmitHandler) => {
 
     const [formValues, setFormValues] = useState(initialValues);
+    const [errors, setErrors] = useState({});
 
     const onChangeHandler = (e) => {
         setFormValues(() => ({...formValues, [e.target.name] : e.target.value}))
@@ -16,10 +17,39 @@ export const useForm = (initialValues, onSubmitHandler) => {
         }
     } 
 
+    const checkLength = (e, min, max) => {
+        setErrors(state => ({
+            ...state,
+            [e.target.name]: formValues[e.target.name].length < min || formValues[e.target.name].length > max 
+        }))
+    };
+
+    const urlCheck = (e) => {
+        const regex = /^https?:\/\/.+$/
+        setErrors(state => ({
+            ...state,
+            [e.target.name]: !regex.test(formValues[e.target.name])
+        }));
+    };
+
+    const emailCheck = (e) => {
+        const regex = /^[A-z]+@[A-z]+\.[A-z]+$/;
+        setErrors(state => ({
+            ...state,
+            [e.target.name]: !regex.test(formValues[e.target.name])
+        }));
+    };
+
     return {
         formValues,
         onSubmit,
-        onChangeHandler
+        onChangeHandler,
+        checkLength,
+        urlCheck,
+        emailCheck,
+        errors
     }
 }
+
+
 

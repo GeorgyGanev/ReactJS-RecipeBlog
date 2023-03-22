@@ -21,15 +21,6 @@ input[type="text"]:focus, input[type="number"]:focus, input[type="password"]:foc
   outline: none;
 }
 
-/* Overwrite default styles of hr */
-
-hr {
-  border: 1px solid #f1f1f1;
-  margin-bottom: 25px;
-}
-
-/* Set a style for the submit/register button */
-
 .registerbtn {
   background-color: black;
   color: white;
@@ -44,16 +35,22 @@ hr {
   opacity: 1;
 }
 
-/* Add a blue text color to links */
-
 a {
   color: rgb(11, 94, 177);
 }
-
-/* Set a grey background color and center the text of the "sign in" section */
 
 .signin {
   padding: 10px;
   background-color: #f1f1f1;
   text-align: center;
+}
+
+label {
+  font-weight: bold;
+}
+
+.warning-message {
+  color: red;
+  margin-top: 0;
+  margin-bottom: 20px;
 }

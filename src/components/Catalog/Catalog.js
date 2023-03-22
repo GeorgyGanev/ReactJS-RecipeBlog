@@ -5,7 +5,7 @@ export const Catalog = ({
     recipes
 }) => {
     return (
-        <section id={styles["recipe-listings"]}>
+    <section id={styles["recipe-listings"]}>
         <h1>Recipes Catalog</h1>
         <div className={styles["listings"]}>
 

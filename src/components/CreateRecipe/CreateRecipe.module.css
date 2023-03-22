@@ -26,3 +26,13 @@ textarea {
     cursor: pointer;
     opacity: 0.9;
   }
+
+  .warning-message {
+    margin-top: 0;
+    margin-bottom: 10px;
+    color: red;
+  }
+
+  label {
+    font-weight: bold;
+  }
