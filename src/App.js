@@ -12,6 +12,7 @@ import { CreateRecipe } from './components/CreateRecipe/CreateRecipe';
 import { Catalog } from './components/Catalog/Catalog';
 import { Logout } from './components/Logout/Logout';
 import { RecipeDetails } from './components/RecipeDetails/RecipeDetails';
+import { EditRecipe } from './components/EditRecipe/EditRecipe';
 
 function App() {
   const navigate = useNavigate();
@@ -41,6 +42,14 @@ function App() {
       
       navigate('/catalog');
 }
+
+const onRecipeEditSubmit = async (values) => {
+    const result = await recipeService.editRecipe (values._id, values);
+
+    setRecipes(state => state.map(x => x._id === values._id ? result : x));
+
+    navigate(`/catalog/${values._id}`);
+}
   
 
   return (
@@ -59,6 +68,7 @@ function App() {
             <Route path='/create' element={<CreateRecipe onCreateRecipeSubmit={onCreateRecipeSubmit} />}/>
             <Route path='/catalog' element={<Catalog recipes={recipes} /> } />
             <Route path='/catalog/:recipeId' element={<RecipeDetails onDeleteHandler={onDeleteHandler} /> } />
+            <Route path='/catalog/:recipeId/edit' element={<EditRecipe onRecipeEditSubmit={onRecipeEditSubmit} /> } />
           
           </Routes>
 

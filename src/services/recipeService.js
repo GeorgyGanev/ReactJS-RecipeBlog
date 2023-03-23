@@ -29,10 +29,15 @@ export const recipeServiceFactory = (token) => {
         request.delete(`${baseUrl}/${id}`)
     };
 
+    const editRecipe = (recipeId, data) => {
+        request.put(`${baseUrl}/${recipeId}`, data);
+    }
+
     return {
         getAll,
         createRecipe,
         getOne,
+        editRecipe,
         deleteRecipe
     };
 };

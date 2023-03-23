@@ -40,10 +40,15 @@ export const useForm = (initialValues, onSubmitHandler) => {
         }));
     };
 
+    const changeFormValues = (newValues) => {
+        setFormValues(newValues);
+    }
+
     return {
         formValues,
         onSubmit,
         onChangeHandler,
+        changeFormValues,
         checkLength,
         urlCheck,
         emailCheck,

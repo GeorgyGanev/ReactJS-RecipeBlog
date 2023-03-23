@@ -1,0 +1,38 @@
+#create-recipe {
+    background-color: white;
+    text-align: center;
+    width: 500px;
+    margin: auto;
+    padding-bottom: 50px;
+}
+
+textarea {
+    background-color: white;
+    text-align: center;
+    width: 500px;
+    margin: auto;
+    height: 200px;
+    text-align: left;
+    white-space: pre-wrap;
+    padding: 2px;
+}
+
+.registerbtn {
+    background-color: black;
+    color: white;
+    padding: 16px 10px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    opacity: 0.9;
+  }
+
+  .warning-message {
+    margin-top: 0;
+    margin-bottom: 10px;
+    color: red;
+  }
+
+  label {
+    font-weight: bold;
+  }
