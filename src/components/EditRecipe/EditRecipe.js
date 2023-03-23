@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 
 import { useForm } from '../../hooks/useForm';
 import { useService } from '../../hooks/useService';
@@ -10,7 +10,7 @@ import styles from './EditRecipe.module.css';
 export const EditRecipe = ({
     onRecipeEditSubmit
 }) => {
-
+    const navigate = useNavigate();
     const { recipeId } = useParams(); 
     const recipeService = useService(recipeServiceFactory);
 
@@ -64,8 +64,13 @@ export const EditRecipe = ({
                     {errors.preparation && 
                     <p className={styles["warning-message"]}>Please provide preparation instructions!</p>}
 
-                <input type="submit" className={styles["registerbtn"]} value="Post Recipe" />
+                <button type="submit" className={styles["registerbtn"]}>Edit</button>
+                <Link to={`/catalog/${recipeId}`} className={styles["registerbtn"]}>Back</Link>
+                
             </form>
+
+           
+               
         </div>
     </section>
     );

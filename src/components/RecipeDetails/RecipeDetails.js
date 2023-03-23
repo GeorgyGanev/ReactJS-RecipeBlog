@@ -1,6 +1,6 @@
 import styles from './RecipeDetails.module.css';
 import { useState, useEffect, useContext} from 'react';
-import { Link, useParams, useNavigate } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 import { recipeServiceFactory } from '../../services/recipeService';
 import { useService } from '../../hooks/useService';
