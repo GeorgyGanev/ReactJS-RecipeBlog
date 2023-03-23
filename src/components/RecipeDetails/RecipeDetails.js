@@ -6,13 +6,14 @@ import { recipeServiceFactory } from '../../services/recipeService';
 import { useService } from '../../hooks/useService';
 import { AuthContext } from '../../contexts/AuthContext';
 
-export const RecipeDetails = () => {
+export const RecipeDetails = ({
+    onDeleteHandler
+}) => {
     const { userId } = useContext(AuthContext);
     const { recipeId } = useParams();
     const [recipe, setRecipe] = useState({});
     const recipeService = useService(recipeServiceFactory);
-    const navigate = useNavigate();
-
+   
     useEffect(() => {
         recipeService.getOne(recipeId)
             .then(result => {
@@ -49,12 +50,12 @@ export const RecipeDetails = () => {
                 <div className={styles["listings-buttons"]}>
                         {isOwner && (
                             <div className={styles['owner']}>
-                                <Link to="#" className="button-list">Edit</Link>
-                                <Link to="#" className="button-list">Delete</Link>
+                                <Link to={`/catalog/${recipeId}/edit`} className={styles["button-list"]}>Edit</Link>
+                                <button onClick={() => onDeleteHandler(recipeId)} className={styles["button-list"]}>Delete</button>
                             </div>
                         )}
 
-                        <Link to="/catalog" className="button-list">Back</Link>
+                        <Link to="/catalog" className={styles["button-list"]}>Back</Link>
                 </div>
 
             

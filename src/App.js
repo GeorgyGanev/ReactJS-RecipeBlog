@@ -1,12 +1,10 @@
-import { Routes, Route, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import { AuthContext } from './contexts/AuthContext';
+import { Routes, Route, useNavigate } from 'react-router-dom';
 
 import { recipeServiceFactory }from './services/recipeService';
-import { authServiceFactory } from './services/authService';
+import { AuthProvider } from './contexts/AuthContext';
  
 import { Header } from './components/Header/Header';
-
 import { Home } from './components/Home/Home';
 import { Login } from './components/Login/Login';
 import { Register } from './components/Register/Register';
@@ -18,46 +16,14 @@ import { RecipeDetails } from './components/RecipeDetails/RecipeDetails';
 function App() {
   const navigate = useNavigate();
   const [recipes, setRecipes] = useState([]);
-  const [user, setUser] = useState({});
-  const recipeService = recipeServiceFactory(user.accessToken);
-  const authService = authServiceFactory(user.accessToken);
+  const recipeService = recipeServiceFactory();
 
   useEffect(() => {
     recipeService.getAll()
       .then(result => {
-        setRecipes(result)
+            setRecipes(result);          
       })
   }, []);
-
-  const onLoginSubmit = async (data) => {
-    try {
-      const result = await authService.login(data);
-
-      setUser(result);
-      navigate('/catalog')
-
-    } catch (err) {
-      console.log('login problem')
-    }
-  };
-
-  const onRegisterSubmit = async (data) => {
-
-    const { repeatPass, ...registerData } = data;
-
-    if (repeatPass !== registerData.password) {
-      return;
-    }
-
-    try {
-      const result = await authService.register(registerData);
-
-      setUser(result);
-      navigate('/catalog')
-    }catch(err) {
-      console.log('register problem')
-    }
-  };
 
   const onCreateRecipeSubmit = async (recipeData) => {
       const newRecipe = await recipeService.createRecipe(recipeData);
@@ -66,27 +32,19 @@ function App() {
 
       navigate('/catalog');
   };
+
+  const onDeleteHandler = async (recipeId) => {
+
+      await recipeService.deleteRecipe(recipeId);
+      
+      setRecipes(state =>  state.filter(x => x._id !== recipeId))
+      
+      navigate('/catalog');
+}
   
-  const onLogout = async () => {
-    await authService.logout();
-    
-    setUser({});
-  };
-
-  const contextValues = {
-    onLoginSubmit,
-    onRegisterSubmit,
-    onLogout,
-    userId: user._id,
-    token: user.accessToken,
-    userEmail: user.email,
-    isAuthenticated: !!user.accessToken
-  };
-
- 
 
   return (
-  <AuthContext.Provider value={contextValues}>
+  <AuthProvider>
 
     <div id='App'>
       
@@ -100,7 +58,7 @@ function App() {
             <Route path='/logout' element={<Logout />} />
             <Route path='/create' element={<CreateRecipe onCreateRecipeSubmit={onCreateRecipeSubmit} />}/>
             <Route path='/catalog' element={<Catalog recipes={recipes} /> } />
-            <Route path='/catalog/:recipeId' element={<RecipeDetails /> } />
+            <Route path='/catalog/:recipeId' element={<RecipeDetails onDeleteHandler={onDeleteHandler} /> } />
           
           </Routes>
 
@@ -108,7 +66,7 @@ function App() {
 
     </div>
 
-  </AuthContext.Provider>
+  </AuthProvider>
   );
 }
 

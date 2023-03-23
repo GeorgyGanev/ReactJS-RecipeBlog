@@ -1,46 +1,58 @@
-export const request = async (method, token, url, data) => {
+const request = async (method, token, url, data) => {
+    const options = {};
 
-    const options = {
-        method,
-        headers: {}
-    }
+    if (method !== 'GET') {
+        options.method = method;
 
-    if (data !== undefined){
-        options.headers['Content-Type'] = 'application/json';
-        options.body = JSON.stringify(data);
-    }
+        if (data) {
+            options.headers = {
+                'content-type': 'application/json',
+            };
 
-    if (token){
-        options.headers['X-Authorization'] = token;
-    }
-
-        const response = await fetch(url, options);
-
-        if (response.status === 204){
-            return {};
+            options.body = JSON.stringify(data);
         }
+    }
 
-        const result = await response.json();
+    if (token) {
+        options.headers = {
+            ...options.headers,
+            'X-Authorization': token,
+        };
+    }
 
-        if (response.ok === false){
-          
-            if (response.status === 404){
-                console.log('no data')
-            }
-            throw result;
-        }
+    const response = await fetch(url, options);
 
-        return result;
+    if (response.status === 204) {
+        return {};
+    }
 
-}
+    const result = await response.json();
+
+    if (!response.ok) {
+        return{};
+    }
+
+    return result;
+};
+
 
 export const requestFactory = (token) => {
+
+    if (!token){
+        const serialisedAuth = localStorage.getItem('auth');
+
+        if (serialisedAuth){
+            const auth = JSON.parse(serialisedAuth);
+            token = auth.accessToken;
+        }
+    }
+
     return {
         get: request.bind(null, 'GET', token),
-        post: request.bind(null,'POST', token),
+        post: request.bind(null, 'POST', token),
         put: request.bind(null, 'PUT', token),
         patch: request.bind(null, 'PATCH', token),
         delete: request.bind(null, 'DELETE', token),
     }
-}
+};
 

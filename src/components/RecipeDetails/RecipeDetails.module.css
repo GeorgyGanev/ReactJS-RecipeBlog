@@ -3,7 +3,6 @@
     margin-top: 50px;
 }
 
-
 .listing-props {
     margin-top: 16px;
     margin-bottom: 16px;
@@ -39,7 +38,6 @@
     font-size: 16px;
 }
 
-
 .details-info>img {
     display: block;
     margin: auto;
@@ -49,5 +47,31 @@
 
 .description-para {
     margin-top: 16px;
+    font-size: 16px;
+}
+
+button.button-list{
+    background-color: black;
+    border: none;
+    color: white;
+    padding: 10px;
+    width: 100px;
+    margin: 2px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+
+a.button-list {
+    background-color: black;
+    border: none;
+    color: white;
+    padding: 10px;
+    width: 100px;
+    margin: 2px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
     font-size: 16px;
 }
