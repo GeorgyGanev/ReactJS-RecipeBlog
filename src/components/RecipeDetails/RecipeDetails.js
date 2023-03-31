@@ -69,7 +69,7 @@ export const RecipeDetails = () => {
                     </div>
                    
                     <AddComment />
-                    
+
                 </div>
         
             </div>
