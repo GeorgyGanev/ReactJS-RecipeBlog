@@ -6,6 +6,7 @@ import { recipeServiceFactory } from '../../services/recipeService';
 import { useService } from '../../hooks/useService';
 import { AuthContext } from '../../contexts/AuthContext';
 import { useRecipeContext } from '../../contexts/RecipeContex';
+import { AddComment } from './AddComment/AddComment';
 
 export const RecipeDetails = () => {
     const { onDeleteHandler } = useRecipeContext();
@@ -57,10 +58,20 @@ export const RecipeDetails = () => {
                         )}
 
                         <Link to={'/catalog'} className={styles["button-list"]}>Back</Link>
+                        <Link to={'/catalog'} className={styles["button-list"]}>Comments</Link>
                 </div>
-
-            
                 
+                <div className={styles["comment-section"]}>
+                    <div className={styles["comment-top"]}>
+                        <div className={styles["user-details"]}>
+                            <p><b>Username</b>: Comment Details</p>
+                        </div>
+                    </div>
+                   
+                    <AddComment />
+                    
+                </div>
+        
             </div>
         </section>
     );

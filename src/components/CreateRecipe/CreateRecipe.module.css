@@ -36,3 +36,10 @@ textarea {
   label {
     font-weight: bold;
   }
+
+  a {
+    background-color: black;
+    color: white;
+    padding: 5px;
+    text-decoration: none;
+  }

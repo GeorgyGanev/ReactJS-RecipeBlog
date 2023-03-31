@@ -1,0 +1,39 @@
+
+#comment-text-area {
+    position: absolute;
+    left: 30px;
+    width: 85%;
+    resize: none;
+    overflow: hidden;
+    height: 10px;
+    border: none;
+    outline: none;
+    font-weight: 400;
+    font-size: 14px;
+    color: #262626;
+    background: none;
+}
+
+.addComments {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+    border-top: 1px solid #ddd;
+    padding: 10px 0;
+  }
+  
+  .addComments>button {
+    position: absolute;
+    right: 30px;
+    color: black;
+    font-weight: 500;
+    font-size: 15px;
+    border: none;
+    background-color: inherit;
+    cursor: pointer;
+  }
+  
+  .addComments form {
+    display: flex;
+    margin-bottom: 15px;
+  }
