@@ -1,6 +1,6 @@
 import styles from './RecipeDetails.module.css';
 import { useState, useEffect, useContext} from 'react';
-import { Link, useParams, useNavigate } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 import { recipeServiceFactory } from '../../services/recipeService';
 import { useService } from '../../hooks/useService';
@@ -8,7 +8,6 @@ import { AuthContext } from '../../contexts/AuthContext';
 import { useRecipeContext } from '../../contexts/RecipeContex';
 
 export const RecipeDetails = () => {
-    const navigate = useNavigate();
     const { onDeleteHandler } = useRecipeContext();
     const { userId } = useContext(AuthContext);
     const { recipeId } = useParams();
@@ -27,6 +26,7 @@ export const RecipeDetails = () => {
     return (
         <section id={styles["listing-details"]}>
             <h2>{recipe.dishName}</h2>
+            <h3>{recipe.description}</h3>
             <div className={styles["details-info"]}>
                 <img src={recipe.imageUrl} alt='img' />
                 

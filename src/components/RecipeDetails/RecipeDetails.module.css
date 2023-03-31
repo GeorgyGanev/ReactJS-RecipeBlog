@@ -75,3 +75,8 @@ a.button-list {
     display: inline-block;
     font-size: 16px;
 }
+
+h3 {
+    text-align: center;
+    border-bottom: 15px;
+}
