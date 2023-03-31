@@ -1,14 +1,15 @@
 import styles from './RecipeDetails.module.css';
 import { useState, useEffect, useContext} from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 
 import { recipeServiceFactory } from '../../services/recipeService';
 import { useService } from '../../hooks/useService';
 import { AuthContext } from '../../contexts/AuthContext';
+import { useRecipeContext } from '../../contexts/RecipeContex';
 
-export const RecipeDetails = ({
-    onDeleteHandler
-}) => {
+export const RecipeDetails = () => {
+    const navigate = useNavigate();
+    const { onDeleteHandler } = useRecipeContext();
     const { userId } = useContext(AuthContext);
     const { recipeId } = useParams();
     const [recipe, setRecipe] = useState({});
@@ -55,7 +56,7 @@ export const RecipeDetails = ({
                             </div>
                         )}
 
-                        <Link to="/catalog" className={styles["button-list"]}>Back</Link>
+                        <Link to={'/catalog'} className={styles["button-list"]}>Back</Link>
                 </div>
 
             

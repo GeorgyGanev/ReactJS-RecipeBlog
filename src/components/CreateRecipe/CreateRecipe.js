@@ -1,10 +1,10 @@
 import styles from './CreateRecipe.module.css';
 
 import { useForm } from '../../hooks/useForm';
+import { useRecipeContext } from '../../contexts/RecipeContex';
 
-export const CreateRecipe = ({
-    onCreateRecipeSubmit
-}) => {
+export const CreateRecipe = () => {
+    const {onCreateRecipeSubmit} = useRecipeContext();
     const { formValues, onChangeHandler, onSubmit, errors, checkLength, urlCheck } = useForm({
         dishName: '',
         description: '',

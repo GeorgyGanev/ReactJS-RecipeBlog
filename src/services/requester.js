@@ -1,4 +1,4 @@
-const request = async (method, token, url, data) => {
+const requester = async (method, url, data) => {
     const options = {};
 
     if (method !== 'GET') {
@@ -13,11 +13,17 @@ const request = async (method, token, url, data) => {
         }
     }
 
-    if (token) {
-        options.headers = {
-            ...options.headers,
-            'X-Authorization': token,
-        };
+    const serialisedAuth = localStorage.getItem('auth');
+
+    if (serialisedAuth){
+        const auth = JSON.parse(serialisedAuth);
+
+        if (auth.accessToken) {
+            options.headers = {
+                ...options.headers,
+                'X-Authorization': auth.accessToken,
+            };
+        }
     }
 
     const response = await fetch(url, options);
@@ -36,23 +42,14 @@ const request = async (method, token, url, data) => {
 };
 
 
-export const requestFactory = (token) => {
-
-    if (!token){
-        const serialisedAuth = localStorage.getItem('auth');
-
-        if (serialisedAuth){
-            const auth = JSON.parse(serialisedAuth);
-            token = auth.accessToken;
-        }
-    }
+export const requestFactory = () => {
 
     return {
-        get: request.bind(null, 'GET', token),
-        post: request.bind(null, 'POST', token),
-        put: request.bind(null, 'PUT', token),
-        patch: request.bind(null, 'PATCH', token),
-        delete: request.bind(null, 'DELETE', token),
+        get: requester.bind(null, 'GET', ),
+        post: requester.bind(null, 'POST'),
+        put: requester.bind(null, 'PUT'),
+        patch: requester.bind(null, 'PATCH'),
+        delete: requester.bind(null, 'DELETE'),
     }
 };
 

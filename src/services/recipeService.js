@@ -7,9 +7,7 @@ export const recipeServiceFactory = (token) => {
 
     const getAll = async () => {
         const result = await request.get(baseUrl);
-       
-        const recipes = Object.values(result);
-        console.log(recipes)
+       const recipes = Object.values(result);
         return recipes;
     };
     
@@ -29,9 +27,10 @@ export const recipeServiceFactory = (token) => {
         request.delete(`${baseUrl}/${id}`)
     };
 
-    const editRecipe = (recipeId, data) => {
-        request.put(`${baseUrl}/${recipeId}`, data);
-    }
+    const editRecipe = async (recipeId, data) => {
+        const result = await request.put(`${baseUrl}/${recipeId}`, data);
+        return result;
+    }   
 
     return {
         getAll,

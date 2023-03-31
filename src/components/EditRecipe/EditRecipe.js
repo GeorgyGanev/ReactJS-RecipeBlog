@@ -1,27 +1,28 @@
 import { useEffect } from 'react';
-import { Link, useParams, useNavigate } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
+import { useRecipeContext } from '../../contexts/RecipeContex';
 
 import { useForm } from '../../hooks/useForm';
 import { useService } from '../../hooks/useService';
 import { recipeServiceFactory } from '../../services/recipeService';
 
+
 import styles from './EditRecipe.module.css';
 
-export const EditRecipe = ({
-    onRecipeEditSubmit
-}) => {
-    const navigate = useNavigate();
+export const EditRecipe = () => {
+    const { onRecipeEditSubmit } = useRecipeContext();
     const { recipeId } = useParams(); 
     const recipeService = useService(recipeServiceFactory);
 
     const { formValues, onChangeHandler, onSubmit, errors, checkLength, urlCheck, changeFormValues } = useForm({
+        _id: recipeId,
         dishName: '',
         description: '',
         imageUrl: '',
         servings: '',
         ingredients: '',
         preparation: ''
-    }, onRecipeEditSubmit );
+    }, onRecipeEditSubmit);
 
     useEffect(() => {
         recipeService.getOne(recipeId)

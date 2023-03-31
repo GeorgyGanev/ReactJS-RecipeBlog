@@ -14,6 +14,8 @@ export const useForm = (initialValues, onSubmitHandler) => {
 
         if (onSubmitHandler && !Object.values(formValues).some(x => x === '')) {
             onSubmitHandler(formValues);
+
+            setFormValues(initialValues);
         }
     } 
 
