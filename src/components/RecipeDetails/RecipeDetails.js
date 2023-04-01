@@ -3,6 +3,8 @@ import { useState, useEffect, useContext} from 'react';
 import { Link, useParams } from 'react-router-dom';
 
 import { recipeServiceFactory } from '../../services/recipeService';
+import * as commentService from '../../services/commentService'
+
 import { useService } from '../../hooks/useService';
 import { AuthContext } from '../../contexts/AuthContext';
 import { useRecipeContext } from '../../contexts/RecipeContex';
@@ -13,6 +15,7 @@ export const RecipeDetails = () => {
     const { userId } = useContext(AuthContext);
     const { recipeId } = useParams();
     const [recipe, setRecipe] = useState({});
+    const [showComment, setShowComment] = useState(false);
     const recipeService = useService(recipeServiceFactory);
    
     useEffect(() => {
@@ -22,12 +25,16 @@ export const RecipeDetails = () => {
             })
     }, [recipeId]);
 
+    const onCommentShowClick = () => {
+        setShowComment(!showComment);
+    }
+
     const isOwner = recipe._ownerId === userId;
 
     return (
         <section id={styles["listing-details"]}>
             <h2>{recipe.dishName}</h2>
-            <h3>{recipe.description}</h3>
+            <h3>{recipe.description} - {recipe.servings} servings</h3>
             <div className={styles["details-info"]}>
                 <img src={recipe.imageUrl} alt='img' />
                 
@@ -58,19 +65,22 @@ export const RecipeDetails = () => {
                         )}
 
                         <Link to={'/catalog'} className={styles["button-list"]}>Back</Link>
-                        <Link to={'/catalog'} className={styles["button-list"]}>Comments</Link>
+                        <button onClick={onCommentShowClick} className={styles["button-list"]}>Comments</button>
                 </div>
                 
-                <div className={styles["comment-section"]}>
+                {showComment && (
+                    <div className={styles["comment-section"]}>
                     <div className={styles["comment-top"]}>
                         <div className={styles["user-details"]}>
                             <p><b>Username</b>: Comment Details</p>
                         </div>
                     </div>
                    
-                    <AddComment />
-
+                   {!isOwner && <AddComment />}
+                    
                 </div>
+                )}
+                
         
             </div>
         </section>
