@@ -1,7 +1,15 @@
 import styles from './Home.module.css'
 import { Link } from 'react-router-dom';
 
+import { useRecipeContext } from '../../contexts/RecipeContex'
+
+import { CatalogItem } from '../CatalogItem/CatalogItem';
+
 export const Home = () => {
+
+    const { recipes } = useRecipeContext();
+    const lastThreeRecipes = recipes.slice(-4).reverse(); 
+
     return (
         <div id={styles['main']}>
             
@@ -17,13 +25,16 @@ export const Home = () => {
                 </div> 
             </div>
 
-            <div id={styles['welcome-container']}>
+            <div class={styles["listings"]}>
                 
                 <h2>Latest Recipes</h2>
 
-                    <div>
+                {lastThreeRecipes && lastThreeRecipes !== 0 && (
+                    lastThreeRecipes.map(x => <CatalogItem key={x._id} {...x} />)
+                )}
+                    {/* <div>
                         <Link to="/catalog" className={styles.button}>Listings</Link>
-                    </div>
+                    </div> */}
             </div>
 
 
