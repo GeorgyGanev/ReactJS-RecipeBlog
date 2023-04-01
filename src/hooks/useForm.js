@@ -13,6 +13,7 @@ export const useForm = (initialValues, onSubmitHandler) => {
         e.preventDefault();
 
         if (onSubmitHandler && !Object.values(formValues).some(x => x === '')) {
+
             onSubmitHandler(formValues);
 
             setFormValues(initialValues);

@@ -20,9 +20,6 @@ export const AuthProvider = ({
           
           setAuth(result);
 
-          if (result = {}){
-            return;
-          }
           navigate('/catalog')
     
         } catch (err) {
@@ -35,17 +32,18 @@ export const AuthProvider = ({
         const { repeatPass, ...registerData } = data;
     
         if (repeatPass !== registerData.password) {
-          return;
+          return alert('Passwords do not match');
         }
        
         try {
           const result = await authService.register(registerData);
           
           setAuth(result);
+
           navigate('/catalog')
           
         }catch(err) {
-          console.log(err.message)
+          return alert('Please use a different email or username')
         }
 
       };

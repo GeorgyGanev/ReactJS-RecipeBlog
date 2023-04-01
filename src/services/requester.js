@@ -40,6 +40,11 @@ const requester = async (method, url, data) => {
             throw new Error ('Invalid credentials')
         }
 
+        if (response.status === 409){
+            
+            throw new Error('A user with the same email already exists')
+        }
+
         return{};
     }
 
