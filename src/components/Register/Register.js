@@ -10,6 +10,7 @@ export const Register = () => {
 
     const { formValues, onSubmit, onChangeHandler, errors, checkLength } = useForm({
         email: '',
+        username: '',
         password: '',
         repeatPass: ''
     }, onRegisterSubmit);
@@ -22,10 +23,15 @@ export const Register = () => {
                 <form onSubmit={onSubmit} method='post' id={styles["register-form"]}>
                     <h2>Register</h2>
                 
-                    <label htmlFor="username">Email</label>
-                    <input type="text" placeholder="Enter Username" name="email" required value={formValues.username} onChange={onChangeHandler} onBlur={(e) => checkLength(e, 1, 20)} />
+                    <label htmlFor="email">Email</label>
+                    <input type="text" placeholder="Enter Email" name="email" required value={formValues.email} onChange={onChangeHandler} onBlur={(e) => checkLength(e, 1, 20)} />
                         {errors.email && 
                             <p className={styles['warning-message']}>Email is mandatory!</p>}
+                    
+                    <label htmlFor="username">Username</label>
+                    <input type="text" placeholder="Enter Username" name="username" required value={formValues.username} onChange={onChangeHandler} onBlur={(e) => checkLength(e, 1, 20)} />
+                        {errors.username && 
+                            <p className={styles['warning-message']}>Username is mandatory!</p>}
 
                     <label htmlFor="password">Password</label>
                     <input type="password" placeholder="Enter Password" name="password" required value={formValues.password} onChange={onChangeHandler} onBlur={(e) => checkLength(e, 1)}/>
@@ -33,7 +39,7 @@ export const Register = () => {
                             <p className={styles['warning-message']}>Password is mandatory!</p>}
 
                     <label htmlFor="repeatPass">Repeat Password</label>
-                    <input type="password" placeholder="Repeat Password" name="repeatPass" required onChange={onChangeHandler} onBlur={(e) => checkLength(e, 1)}/>
+                    <input type="password" placeholder="Repeat Password" name="repeatPass" required value={formValues.repeatPass} onChange={onChangeHandler} onBlur={(e) => checkLength(e, 1)}/>
                         {errors.repeatPass && 
                             <p className={styles['warning-message']}>Password is mandatory!</p>}    
                     

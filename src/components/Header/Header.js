@@ -5,14 +5,14 @@ import { AuthContext } from '../../contexts/AuthContext';
 
 export const Header = () => {
 
-    const { isAuthenticated, userEmail } = useContext(AuthContext);
+    const { isAuthenticated, username } = useContext(AuthContext);
 
     return (
 <header>
     <nav>
         <Link to='/' className="active">Home</Link>
         {isAuthenticated && (
-            <Link to='/userProfile'>{userEmail}</Link>
+            <Link to='/userProfile'>{username}</Link>
         )}
 
             {isAuthenticated && (

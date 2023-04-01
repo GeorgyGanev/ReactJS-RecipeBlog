@@ -25,6 +25,7 @@ const requester = async (method, url, data) => {
             };
         }
     }
+    
 
     const response = await fetch(url, options);
 
@@ -35,6 +36,7 @@ const requester = async (method, url, data) => {
     const result = await response.json();
 
     if (!response.ok) {
+      
         return{};
     }
 

@@ -33,15 +33,17 @@ export const AuthProvider = ({
         if (repeatPass !== registerData.password) {
           return;
         }
-    
+       
         try {
           const result = await authService.register(registerData);
-    
+          
           setAuth(result);
           navigate('/catalog')
+          
         }catch(err) {
-          console.log('error: ' + err.message)
+          console.log(err.message)
         }
+
       };
 
       const onLogout = async () => {
@@ -56,6 +58,7 @@ export const AuthProvider = ({
         userId: auth._id,
         token: auth.accessToken,
         userEmail: auth.email,
+        username: auth.username,
         isAuthenticated: !!auth.accessToken
       };
 

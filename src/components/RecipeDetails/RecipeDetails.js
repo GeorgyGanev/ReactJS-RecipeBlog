@@ -12,7 +12,7 @@ import { AddComment } from './AddComment/AddComment';
 
 export const RecipeDetails = () => {
     const { onDeleteHandler } = useRecipeContext();
-    const { userId, userEmail, isAuthenticated } = useContext(AuthContext);
+    const { userId, userEmail, username, isAuthenticated } = useContext(AuthContext);
     const { recipeId } = useParams();
     const [recipe, setRecipe] = useState({});
     const [showComment, setShowComment] = useState(false);
@@ -40,7 +40,7 @@ export const RecipeDetails = () => {
                 {
                     ...response,
                     author: {
-                        email: userEmail
+                        username
                     }
                 }
             ]
@@ -98,7 +98,7 @@ export const RecipeDetails = () => {
 
                             {recipe.comments && recipe.comments.map(x => (
                                 <li key={x._id}>
-                                    <p><b>{x.author.email}</b>: {x.comment}</p>
+                                    <p><b>{x.author.username}</b>: {x.comment}</p>
                                 </li>
                             ))}
 
