@@ -17,12 +17,16 @@ export const AuthProvider = ({
     const onLoginSubmit = async (data) => {
         try {
           const result = await authService.login(data);
-    
+          
           setAuth(result);
+
+          if (result = {}){
+            return;
+          }
           navigate('/catalog')
     
         } catch (err) {
-          console.log('login problem')
+          return alert('Invalid email or passwor')
         }
       };
     

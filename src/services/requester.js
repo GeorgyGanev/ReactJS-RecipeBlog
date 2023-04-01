@@ -26,7 +26,6 @@ const requester = async (method, url, data) => {
         }
     }
     
-
     const response = await fetch(url, options);
 
     if (response.status === 204) {
@@ -36,7 +35,11 @@ const requester = async (method, url, data) => {
     const result = await response.json();
 
     if (!response.ok) {
-      
+        
+        if (response.status === 403){
+            throw new Error ('Invalid credentials')
+        }
+
         return{};
     }
 
