@@ -7,15 +7,15 @@ export const getAll = async (recipeId) => {
     const searchQuery = encodeURIComponent(`recipeId="${recipeId}"`);
     const relationQuery = encodeURIComponent(`author=_ownerId:users`);
 
-    const result = await request.get(`${baseUrl}?where=${searchQuery}&${relationQuery}`);
+    const result = await request.get(`${baseUrl}?where=${searchQuery}&load=${relationQuery}`);
 
-    const comment = Object.values(result);
+    const comments = Object.values(result);
 
-    return comment;
+    return comments;
 };
 
 export const addComment = async (recipeId, comment) => {
-    const result = await request.post(baseUrl, {recipeId, comment});
+    const result = await request.post(baseUrl, { recipeId, comment });
 
     return result;
 };

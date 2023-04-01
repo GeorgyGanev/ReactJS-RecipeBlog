@@ -2,11 +2,13 @@ import styles from './AddComment.module.css';
 
 import { useForm } from '../../../hooks/useForm';
 
-export const AddComment = () => {
+export const AddComment = ({
+    onCommentSubmit
+}) => {
 
-    const { formValues, onChangeHandler, onSubmit, changeFormValues } = useForm({
+    const { formValues, onChangeHandler, onSubmit } = useForm({
         comment: ''
-    });
+    }, onCommentSubmit);
 
     return (
         <div className={styles["addComments"]}>

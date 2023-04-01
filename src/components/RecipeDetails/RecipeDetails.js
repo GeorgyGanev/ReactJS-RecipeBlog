@@ -1,5 +1,5 @@
 import styles from './RecipeDetails.module.css';
-import { useState, useEffect, useContext} from 'react';
+import { useState, useEffect, useContext, useReducer} from 'react';
 import { Link, useParams } from 'react-router-dom';
 
 import { recipeServiceFactory } from '../../services/recipeService';
@@ -12,18 +12,40 @@ import { AddComment } from './AddComment/AddComment';
 
 export const RecipeDetails = () => {
     const { onDeleteHandler } = useRecipeContext();
-    const { userId } = useContext(AuthContext);
+    const { userId, userEmail, isAuthenticated } = useContext(AuthContext);
     const { recipeId } = useParams();
     const [recipe, setRecipe] = useState({});
     const [showComment, setShowComment] = useState(false);
     const recipeService = useService(recipeServiceFactory);
    
     useEffect(() => {
-        recipeService.getOne(recipeId)
-            .then(result => {
-                setRecipe(result);
+        Promise.all([
+            recipeService.getOne(recipeId),
+            commentService.getAll(recipeId)
+        ]).then(([recipeData, comments]) => {
+            setRecipe({
+                ...recipeData,
+                comments
             })
+        });
     }, [recipeId]);
+
+    const onCommentSubmit = async (values) => {
+        const response = await commentService.addComment(recipeId, values.comment);
+
+        setRecipe(state => ({
+            ...state,
+            comments: [
+                ...state.comments,
+                {
+                    ...response,
+                    author: {
+                        email: userEmail
+                    }
+                }
+            ]
+        }))
+    };
 
     const onCommentShowClick = () => {
         setShowComment(!showComment);
@@ -72,11 +94,23 @@ export const RecipeDetails = () => {
                     <div className={styles["comment-section"]}>
                     <div className={styles["comment-top"]}>
                         <div className={styles["user-details"]}>
-                            <p><b>Username</b>: Comment Details</p>
+                            <ul className={styles["listing-props"]}>
+
+                            {recipe.comments && recipe.comments.map(x => (
+                                <li key={x._id}>
+                                    <p><b>{x.author.email}</b>: {x.comment}</p>
+                                </li>
+                            ))}
+
+                            {recipe.comments && recipe.comments.length === 0 && (
+                                <p>No comments yet</p>
+                            )}
+                            </ul>
+                            
                         </div>
                     </div>
                    
-                   {!isOwner && <AddComment />}
+                   {!isOwner && isAuthenticated && <AddComment onCommentSubmit={onCommentSubmit} />}
                     
                 </div>
                 )}
