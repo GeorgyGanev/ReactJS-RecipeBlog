@@ -12,7 +12,7 @@ import { AddComment } from './AddComment/AddComment';
 
 export const RecipeDetails = () => {
     const { onDeleteHandler } = useRecipeContext();
-    const { userId, userEmail, username, isAuthenticated } = useContext(AuthContext);
+    const { userId, username, isAuthenticated } = useContext(AuthContext);
     const { recipeId } = useParams();
     const [recipe, setRecipe] = useState({});
     const [showComment, setShowComment] = useState(false);

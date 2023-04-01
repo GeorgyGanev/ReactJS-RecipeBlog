@@ -28,12 +28,18 @@ export const RecipeProvider = ({
     };
   
     const onDeleteHandler = async (recipeId) => {
-  
-        await recipeService.deleteRecipe(recipeId);
         
-        setRecipes(state =>  state.filter(x => x._id !== recipeId))
-        
-        navigate('/catalog');
+        const confirm = window.confirm('Are you sure you want to delete this recipe');
+
+        if (confirm) {
+
+            await recipeService.deleteRecipe(recipeId);
+            setRecipes(state =>  state.filter(x => x._id !== recipeId))
+            
+            navigate('/catalog');
+        } else {
+            return;
+        }
   }
   
   const onRecipeEditSubmit = async (values) => {
