@@ -35,7 +35,7 @@ export const recipeServiceFactory = (token) => {
     const searchRecipe = async(name) => {
         const searchQuery = encodeURIComponent(`dishName LIKE "${name}"`);
         const result = await request.get(`${baseUrl}?where=${searchQuery}`);
-        return result;
+        return result;     
     }
 
     return {

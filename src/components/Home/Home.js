@@ -25,11 +25,14 @@ export const Home = () => {
     }, []);
 
     const onSearchSubmit = async () => {
-        setShowSearchResult(true);
+        if (formValues.search !== ''){
 
-        const result = await recipeService.searchRecipe(formValues.search);
-
-        setRecipes(result);
+            setShowSearchResult(true);
+            const result = await recipeService.searchRecipe(formValues.search);
+            setRecipes(result);
+        } else {
+            return;
+        }
     }
 
     return (
