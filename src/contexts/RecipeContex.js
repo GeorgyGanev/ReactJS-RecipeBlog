@@ -51,8 +51,13 @@ export const RecipeProvider = ({
       navigate(`/catalog/${values._id}`);
   }
 
+  const getRecipe = (recipeId) => {
+    return recipes.find(recipe => recipe._id === recipeId);  
+  }
+
   const contextValues = {
     recipes,
+    getRecipe,
     onCreateRecipeSubmit,
     onDeleteHandler, 
     onRecipeEditSubmit

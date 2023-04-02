@@ -12,6 +12,8 @@ import { Catalog } from './components/Catalog/Catalog';
 import { Logout } from './components/Logout/Logout';
 import { RecipeDetails } from './components/RecipeDetails/RecipeDetails';
 import { EditRecipe } from './components/EditRecipe/EditRecipe';
+import { RouteGuard } from './components/common/RouteGuard';
+import { RecipeOwner } from './components/common/RecipeOwner';
 
 function App() {
   
@@ -26,12 +28,24 @@ function App() {
             <Routes>
               <Route path='/' element={<Home />}/>
               <Route path='/login' element={<Login />}/>
-              <Route path='/register' element={<Register />}/>
-              <Route path='/logout' element={<Logout />} />
-              <Route path='/create' element={<CreateRecipe />}/>
+              <Route path='/register' element={<Register />}/> 
+              <Route path='/create' element={
+                <RouteGuard>
+                  <CreateRecipe />
+                </RouteGuard>
+              }/>
+              <Route path='/logout' element={
+                <RouteGuard>
+                  <Logout />
+                </RouteGuard>
+              } />
+              <Route path='/catalog/:recipeId/edit' element={
+                <RecipeOwner>
+                  <EditRecipe /> 
+                </RecipeOwner>
+                } />
               <Route path='/catalog' element={<Catalog /> } />
               <Route path='/catalog/:recipeId' element={<RecipeDetails /> } />
-              <Route path='/catalog/:recipeId/edit' element={<EditRecipe /> } />
             
             </Routes>
 
