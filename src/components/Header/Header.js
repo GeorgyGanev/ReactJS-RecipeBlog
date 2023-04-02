@@ -14,7 +14,7 @@ export const Header = () => {
         {isAuthenticated && (
             <Link to='/userProfile'>{username}</Link>
         )}
-
+    
             {isAuthenticated && (
             <div id={styles['profile']}>
                 <Link to="/catalog">Recipe Catalog</Link>
@@ -22,9 +22,10 @@ export const Header = () => {
                 <Link to="/logout">Logout</Link>
             </div>
             )}
-            
+           
             {!isAuthenticated && (
                 <div id={styles['guest']}>
+                <Link to="/catalog">Recipe Catalog</Link>
                 <Link to="/login">Login</Link>
                 <Link to="register">Register</Link>
             </div>

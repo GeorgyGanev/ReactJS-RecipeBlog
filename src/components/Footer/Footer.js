@@ -4,7 +4,7 @@ export const Footer = () => {
 
     return (
         <footer>
-            <p>RecipeBlog by Georgy_G</p>
+            <p>RecipeBlog</p>
         </footer>
     );
 }

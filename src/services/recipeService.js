@@ -30,13 +30,20 @@ export const recipeServiceFactory = (token) => {
     const editRecipe = async (recipeId, data) => {
         const result = await request.put(`${baseUrl}/${recipeId}`, data);
         return result;
-    }   
+    }  
+
+    const searchRecipe = async(name) => {
+        const searchQuery = encodeURIComponent(`dishName LIKE "${name}"`);
+        const result = await request.get(`${baseUrl}?where=${searchQuery}`);
+        return result;
+    }
 
     return {
         getAll,
         createRecipe,
         getOne,
         editRecipe,
+        searchRecipe,
         deleteRecipe
     };
 };
