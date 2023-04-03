@@ -38,7 +38,7 @@ export const CreateRecipe = () => {
                     {errors.imageUrl && 
                     <p className={styles["warning-message"]}>Invalid URL!</p>}
 
-                <label htmlFor="serving">Servings</label>
+                <label htmlFor="servings">Servings</label>
                 <input type="number" placeholder="Number of servings" name="servings" value={formValues.servings} onChange={onChangeHandler} />
 
                 <label htmlFor="ingredients">Ingredients</label>

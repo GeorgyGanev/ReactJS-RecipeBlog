@@ -20,7 +20,13 @@ export const Home = () => {
         fetch('http://localhost:3030/data/recipes?pageSize=3&sortBy=_createdOn%20desc')
             .then(res => res.json())
             .then(latestRecipes => {
-                setRecipes(latestRecipes)
+                
+                if (latestRecipes.message === 'Resource not found'){
+                    setRecipes([]);
+                } else {
+                    setRecipes(latestRecipes);
+                }
+                
             })
     }, []);
 
@@ -54,7 +60,7 @@ export const Home = () => {
             <div className={styles["listings"]}>  
                 <h2>Latest Recipes</h2>
 
-                {recipes && recipes !== 0 && (
+                {recipes && recipes.length !== 0 && (
                     recipes.map(x => <CatalogItem key={x._id} {...x} />)
                 )}
 

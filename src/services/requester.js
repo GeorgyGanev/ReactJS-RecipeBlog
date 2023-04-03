@@ -45,7 +45,11 @@ const requester = async (method, url, data) => {
             throw new Error('A user with the same email already exists')
         }
 
-        return{};
+        if (response.status === 404) {
+            throw new Error('Resource not found!')
+        }
+
+        return {};
     }
 
     return result;
