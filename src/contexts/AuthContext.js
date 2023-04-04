@@ -16,8 +16,8 @@ export const AuthProvider = ({
 
     const onLoginSubmit = async (data) => {
         try {
-          const result = await authService.login(data);
-          
+          const {password, ...result} = await authService.login(data);
+
           setAuth(result);
 
           navigate('/catalog')
@@ -36,7 +36,7 @@ export const AuthProvider = ({
         }
        
         try {
-          const result = await authService.register(registerData);
+          const {password, ...result} = await authService.register(registerData);
           
           setAuth(result);
 

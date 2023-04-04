@@ -32,14 +32,16 @@ export const Home = () => {
 
     const onSearchSubmit = async () => {
         if (formValues.search !== ''){
-
+            
             setShowSearchResult(true);
+
             const result = await recipeService.searchRecipe(formValues.search);
+            
             setRecipes(result);
         } else {
             return;
         }
-    }
+    };
 
     return (
         <div id={styles['main']}>
