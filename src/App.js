@@ -14,12 +14,15 @@ import { RecipeDetails } from './components/RecipeDetails/RecipeDetails';
 import { EditRecipe } from './components/EditRecipe/EditRecipe';
 import { RouteGuard } from './components/common/RouteGuard';
 import { RecipeOwner } from './components/common/RecipeOwner';
+import { SearchContextProvider } from './contexts/SearchContext';
+import { UserProfile } from './components/UserProfile/UserProfile';
 
 function App() {
   
   return (
   <AuthProvider>
     <RecipeProvider>
+      <SearchContextProvider>
 
       <div id='App'>
         <Header />
@@ -32,6 +35,11 @@ function App() {
               <Route path='/create' element={
                 <RouteGuard>
                   <CreateRecipe />
+                </RouteGuard>
+              }/>
+              <Route path='/userProfile' element={
+                <RouteGuard>
+                  <UserProfile />
                 </RouteGuard>
               }/>
               <Route path='/logout' element={
@@ -51,7 +59,8 @@ function App() {
 
         </div>
       </div>
-
+    
+      </SearchContextProvider>
     </RecipeProvider>
   </AuthProvider>
   );

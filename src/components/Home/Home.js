@@ -8,6 +8,7 @@ import { useForm } from '../../hooks/useForm';
 import { recipeServiceFactory } from '../../services/recipeService';
 
 export const Home = () => {
+
     const recipeService = recipeServiceFactory();
 
     const [recipes, setRecipes] = useState([]);
@@ -26,7 +27,6 @@ export const Home = () => {
                 } else {
                     setRecipes(latestRecipes);
                 }
-                
             })
     }, []);
 

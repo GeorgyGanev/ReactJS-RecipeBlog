@@ -1,6 +1,7 @@
 import { createContext, useContext, useState, useEffect } from 'react';
 
-import { recipeServiceFactory } from '../../services/recipeService';
+import { recipeServiceFactory } from '../services/recipeService';
+import { useForm } from '../hooks/useForm';
 
 export const SearchContext = createContext();
 
@@ -37,22 +38,30 @@ export const SearchContextProvider = (
             const result = await recipeService.searchRecipe(formValues.search);
             
             setRecipes(result);
+            formValues.search = '';
+
         } else {
             return;
         }
     };
 
-    const serachValues = {
+    const searchValues = {
         recipes,
+        formValues,
         showSearchResult,
         onSearchSubmit,
         onChangeHandler
     }
 
     return (
-        <SearchContext.Provider value={serachValues} >
+        <SearchContext.Provider value={searchValues} >
             {children}
         </SearchContext.Provider>
     )
 };
+
+export const useSearchContext = () => {
+    const context = useContext(SearchContext);
+    return context;
+}
 
