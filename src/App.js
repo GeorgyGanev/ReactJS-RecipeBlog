@@ -22,7 +22,6 @@ function App() {
   return (
   <AuthProvider>
     <RecipeProvider>
-      <SearchContextProvider>
 
       <div id='App'>
         <Header />
@@ -60,7 +59,6 @@ function App() {
         </div>
       </div>
     
-      </SearchContextProvider>
     </RecipeProvider>
   </AuthProvider>
   );
